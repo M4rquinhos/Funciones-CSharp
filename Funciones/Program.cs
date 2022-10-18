@@ -166,3 +166,35 @@ void Ducplicar(ref int n)
 Console.WriteLine($"El valor fuera de la funcion es: {cantidad}");
 Ducplicar(ref cantidad);
 Console.WriteLine($"El valor fuera de la funcion es: {cantidad}");
+
+//Ejemplo tipos de referencia 
+var numeros = new int[] { 1, 2, 3};
+
+void DuplicarArreglo(int[] numeros) 
+{
+    for (int i = 0; i < numeros.Length; i++)
+    {
+        numeros[i] *= 2;
+    }
+}
+
+void ImprimirArreglo(int[] numeros) 
+{
+    foreach (var numero in numeros)
+    {
+        Console.Write($"{numero} ");
+    }
+}
+
+Console.Write("Arrglo antes de ser duplicado: ");
+ImprimirArreglo(numeros);
+
+Console.WriteLine();
+
+DuplicarArreglo(numeros);
+
+Console.Write("Arreglo despues de aplicar la duplicacion: ");
+ImprimirArreglo(numeros);
+
+
+//En el caso de las strings(tipo de referencia) son inmutables; cuando se quieren cambiar, se crea solamente una copia y sobre esa copia se trabaja
