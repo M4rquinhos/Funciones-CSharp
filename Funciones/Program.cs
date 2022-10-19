@@ -198,3 +198,10 @@ ImprimirArreglo(numeros);
 
 
 //En el caso de las strings(tipo de referencia) son inmutables; cuando se quieren cambiar, se crea solamente una copia y sobre esa copia se trabaja
+
+
+
+
+//Ejemplo 9: Funciones con parametros out:
+
+//out funcion como ref(mirar ejemplo anterior). A diferencia de ref que tiene que estar las variables inicializadas para poder usarse, con out no s necesario
