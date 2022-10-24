@@ -1,5 +1,7 @@
 ﻿//Ejmplo1: Funciones simples. Retorna un valor
 
+using System.Linq.Expressions;
+
 string ObtenerNombre()
 {
     return "Marco";
@@ -205,3 +207,177 @@ ImprimirArreglo(numeros);
 //Ejemplo 9: Funciones con parametros out:
 
 //out funcion como ref(mirar ejemplo anterior). A diferencia de ref que tiene que estar las variables inicializadas para poder usarse, con out no s necesario
+
+
+
+Console.WriteLine();
+
+//TUPLAS 
+
+//var tupla = (99, 45, "Fulffy");
+(int EdadM, int EdadF, string nombreP) tupla = (99, 45, "Fulffy");
+
+Console.WriteLine(tupla);
+//Console.WriteLine(tupla.Item1);
+//Console.WriteLine(tupla.Item2);
+//Console.WriteLine(tupla.Item3);
+
+Console.WriteLine(tupla.EdadM);
+Console.WriteLine(tupla.EdadF);
+Console.WriteLine(tupla.nombreP);
+
+//Ejemplo 1: Devolviendo varios valores de una funcion
+
+(int duplo, int triplo) DuploYTriplo(int valor) 
+{
+    return (valor * 2, valor * 3);
+}
+
+var cantidad1 = 10;
+var resultado = DuploYTriplo(cantidad1);
+
+Console.WriteLine($"La cantidad es: {cantidad1}");
+Console.WriteLine($"Su duplo es: {resultado.duplo}");
+Console.WriteLine($"Su triplo es: {resultado.triplo}");
+
+
+/*
+    Funciones locales:
+    Son funciones que se pueden declarar dentro de una otra funcion para el uso exclusivo dentro de la misma.
+
+    No se puede acceder a ella desde fuera de la funcion padre
+ */
+
+
+//Expresiones Lambda  => <-- simbolo (se parecen a las arrow functions en Js xd)
+
+int sumar(int a, int b) => a + b;
+
+var suma = sumar(23, 3);
+
+
+//Actions
+
+//Ejemplo con funciones que no reciben parametros
+
+Action imprimirMensaje;
+
+void ImprimirFecha() 
+{
+    Console.WriteLine(DateTime.Now.ToString());
+}
+
+void ImprimirNombree()
+{
+    Console.WriteLine("Marco");
+}
+
+imprimirMensaje = ImprimirFecha;
+imprimirMensaje();
+
+imprimirMensaje = ImprimirNombree;
+imprimirMensaje();
+
+void Procesar(Action action) 
+{
+    Console.WriteLine("Antes de ejecutar el action");
+    action();
+    Console.WriteLine("Despues de ejectuar el action");
+}
+
+Procesar(imprimirMensaje);
+Console.WriteLine();
+Procesar(ImprimirNombree);
+
+//Ejemplo con funciones que si reciben parametros (void)
+
+
+Action<int> alterarNumero;
+
+void sumar2(int valor) 
+{
+    valor++;
+    Console.WriteLine($"El valor + 1 es : {valor}");
+}
+
+alterarNumero = sumar2;
+alterarNumero(5);
+
+
+Action<string, int> imprimirNVeces;
+
+void imprimir(string mensaje3, int veces3) 
+{
+    for (int i = 0; i < veces3; i++)
+    {
+        Console.WriteLine(mensaje3);
+    }
+}
+
+imprimirNVeces = imprimir;
+imprimirNVeces("Marco", 43);
+
+
+//func: parecido a action pero con funciones que si retornan un valor
+
+Func<string> retornaString;
+
+string ObtenerFechaYHoraActual() 
+{
+    return DateTime.Now.ToString();
+}
+
+retornaString = ObtenerFechaYHoraActual;
+var resultado4 = retornaString();
+Console.WriteLine(resultado4);
+
+
+void Procesar2(Func<string> productoValor) 
+{
+    Console.WriteLine("Lines anterior");
+    var valor2 = productoValor();
+    Console.WriteLine($"El valor es: {valor2}");
+    Console.WriteLine("Lines posterior");
+}
+
+Procesar2(retornaString);
+Console.WriteLine();
+
+
+//Predicados es un func que siempre retorna un valor bool
+
+bool EsPar(int n) 
+{
+    return n % 2 == 0;
+}
+
+Predicate<int> predicado = EsPar;
+
+var numero34 = 4;
+Console.WriteLine($"¿Es {numero34} par? {predicado(numero34)}");
+
+
+//En caso de usar cheacar delegados xd
+
+
+//Funciones anonimas:
+
+Action imprimirMensaje3 = () => 
+{
+    Console.WriteLine(DateTime.Now.ToString());
+};
+
+imprimirMensaje3();
+
+
+void Procesar3(Action accion) 
+{
+    Console.WriteLine("Antes de ejecutar la accion");
+    accion();
+    Console.WriteLine("Despues de ejecutar la accion");
+}
+
+Procesar(() => 
+{
+    Console.WriteLine(DateTime.Now.ToString());
+});
